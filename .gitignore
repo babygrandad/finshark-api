@@ -1,0 +1,57 @@
+# .NET
+*.obj
+*.pdb
+*.dll
+*.exe
+*.log
+*.user
+*.vs/
+*.vscode/
+bin/
+obj/
+TestResults/
+
+# Visual Studio files
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Resharper
+_ReSharper*/
+
+# Rider
+.idea/
+
+# Package directories
+packages/
+node_modules/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+*.browsertests
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# Visual Studio Code
+.vscode/
+
+# Appsetting
+appsettings.json
