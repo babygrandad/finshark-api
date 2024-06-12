@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using api.Data;
 using api.Extensions;
@@ -40,6 +41,41 @@ namespace api.Controllers
             var AppUser = await _userManager.FindByNameAsync(username);
             var userPortfolio = await _portfolioRepo.GetUserPortfolio(AppUser);
             return Ok(userPortfolio);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddPortfolio(string symbol)
+        {
+            var username = User.GetUsername();
+            var AppUser = await _userManager.FindByNameAsync(username);
+            //video 27 exctly 3:00 minutes
+            var stock = await _stockRepo.GetBySymbolAsync(symbol);
+
+            if (stock == null)
+            {
+                return BadRequest("Stock not found");
+            }
+
+            var userPortfolio = await _portfolioRepo.GetUserPortfolio(AppUser);
+
+            if (userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower()))
+            {
+                return BadRequest("The stock already exits in your portfolio");
+            }
+
+            var portfolioModel = new Portfolio
+            {
+                StockId = stock.Id,
+                AppUserId = AppUser.Id
+            };
+
+            await _portfolioRepo.CreateAsync(portfolioModel);
+
+            if (portfolioModel == null)
+            { return StatusCode(500, "Could not create"); }
+            else 
+            { return Created(); }
         }
     }
 }
