@@ -3,6 +3,7 @@ using api.Dtos.Stock;
 using api.Helpers;
 using api.interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -20,6 +21,7 @@ namespace api.Controllers
         }
 
         [HttpGet] //CRUD - Read
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
