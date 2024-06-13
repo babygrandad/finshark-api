@@ -91,10 +91,10 @@ builder.Services.AddAuthentication(options =>{
 });
 
 //dependency injection for the Interfaces, Services and Repositories
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
